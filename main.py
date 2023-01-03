@@ -4,8 +4,6 @@ import time
 
 import pynput
 
-exit_threads = threading.Event()
-
 phrases = []
 endings = []
 last_phrase = ""
@@ -29,9 +27,6 @@ def say(string):
 
 
 def on_press(key):
-    if exit_threads.is_set():
-        return False
-
     if str(key) == "Key.f1":
         say("Trash Kid")
 
@@ -96,6 +91,7 @@ def main():
     print("Program Started...")
 
     keyboard_listener_thred = threading.Thread(target=keyboard_listener)
+    keyboard_listener_thred.daemon = True
     keyboard_listener_thred.start()
 
     while True:
@@ -103,10 +99,6 @@ def main():
 
         if command == "quit":
             break
-
-    exit_threads.set()
-    pynput.keyboard.Controller().tap(pynput.keyboard.Key.esc)
-    print("Program Stoped.")
 
 
 if __name__ == "__main__" and len(phrases) != 0:
