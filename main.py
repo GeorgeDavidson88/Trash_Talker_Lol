@@ -4,6 +4,7 @@ import time
 
 import pynput
 
+
 class Main:
     def __init__(self):
         self.phrases = []
@@ -19,14 +20,12 @@ class Main:
             for line in endings_file:
                 self.endings.append(line.strip())
 
-
     def say(self, string):
         pynput.keyboard.Controller().tap(key="/")
         time.sleep(0.05)
         pynput.keyboard.Controller().type(string)
         time.sleep(0.05)
         pynput.keyboard.Controller().tap(pynput.keyboard.Key.enter)
-
 
     def on_press(self, key):
         if str(key) == "Key.f1":
@@ -99,7 +98,8 @@ def main():
     main = Main()
 
     if len(main.phrases) != 0:
-        keyboard_listener_thred = threading.Thread(target=keyboard_listener, args=(main,))
+        keyboard_listener_thred = threading.Thread(
+            target=keyboard_listener, args=(main,))
         keyboard_listener_thred.daemon = True
         keyboard_listener_thred.start()
 
