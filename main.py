@@ -76,8 +76,8 @@ class Main:
 
             self.say(f"{phrase} {ending}")
 
-            last_phrase = phrase
-            last_ending = ending
+            self.last_phrase = phrase
+            self.last_ending = ending
 
     def main_loop(self):
         while True:
