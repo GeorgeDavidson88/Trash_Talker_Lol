@@ -22,8 +22,9 @@ class Main:
 
     def say(self, string):
         pynput.keyboard.Controller().tap(key="/")
-        time.sleep(0.05)
+        time.sleep(0.05)  # You have to wait a bit for the chat to open.
         pynput.keyboard.Controller().type(string)
+        # You have to wait for the letters to be rendered before clicking Enter.
         time.sleep(0.05)
         pynput.keyboard.Controller().tap(pynput.keyboard.Key.enter)
 
@@ -41,22 +42,29 @@ class Main:
             self.say("BAD XD")
 
         elif str(key) == "Key.f8":
+            # Selects a random index from the list of phrases.
             self.phrase_index = random.randint(0, len(self.phrases) - 1)
+            # Selects a random index from the list of endings.
             self.ending_index = random.randint(0, len(self.endings) - 1)
 
+            # Set the current phrase to the random phrase index.
             phrase = self.phrases[self.phrase_index]
+            # Set the current ending to the random ending index.
             ending = self.endings[self.ending_index]
 
             if self.last_phrase.lower() == phrase.lower():
+                # We will not throw an error if there is only one phrase in phrases.txt.
                 if len(self.phrases) != 1:
-                    if self.phrase_index == 0:
+                    if self.phrase_index == 0:  # We can't pick an index that is lower than 0.
                         phrase = self.phrases[self.phrase_index + 1]
+                    # We can't choose an index greater than the length of phrases.txt.
                     elif self.phrase_index == len(self.phrases) - 1:
                         phrase = self.phrases[self.phrase_index - 1]
                     else:
+                        # We will pick the phrase that is one index above the current phrase.
                         phrase = self.phrases[self.phrase_index + 1]
 
-            if self.last_ending.lower() == ending.lower():
+            if self.last_ending.lower() == ending.lower():  # The same logic as above.
                 if len(self.endings) != 1:
                     if self.ending_index == 0:
                         ending = self.endings[self.ending_index + 1]
@@ -65,6 +73,7 @@ class Main:
                     else:
                         ending = self.endings[self.ending_index + 1]
 
+            # To add more variety to the phrases.
             random_number = random.randint(0, 2)
 
             if random_number == 0:
@@ -80,7 +89,7 @@ class Main:
             self.last_ending = ending
 
     def main_loop(self):
-        while True:
+        while True:  # So the user can easily quit the program.
             command = input("Type 'quit' to quit or close the terminal -> ")
 
             if command == "quit":
@@ -88,6 +97,7 @@ class Main:
 
 
 def keyboard_listener(main):
+    # Listen for keys that the user pressed, and when a key is pressed, call the "on_press" function.
     with pynput.keyboard.Listener(on_press=lambda key: main.on_press(key)) as keyboard_listener:
         keyboard_listener.join()
 
@@ -98,6 +108,7 @@ def main():
     main = Main()
 
     if len(main.phrases) != 0:
+        # Create and start the keyboard_listener_thread.
         keyboard_listener_thred = threading.Thread(
             target=keyboard_listener, args=(main,))
         keyboard_listener_thred.daemon = True
