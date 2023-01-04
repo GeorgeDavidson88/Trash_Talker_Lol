@@ -61,7 +61,7 @@ class Main:
                         if self.phrase_index == 0:  # We can't pick an index that is lower than 0.
                             phrase = self.phrases[self.phrase_index + 1]
                         # We can't choose an index greater than the length of phrases.txt.
-                        elif self.phrase_index == len(self.phrases) - 1:
+                        elif self.phrase_index == len(self.phrases - 1):
                             phrase = self.phrases[self.phrase_index - 1]
                         else:
                             # We will pick the phrase that is one index above the current phrase.
