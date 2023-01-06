@@ -1,4 +1,4 @@
-# Trash Talker
+# Trash-Talker
 
 A trash talker because :)
 
