@@ -1,4 +1,4 @@
-# Roblox Trash Talker
+# Trash Talker
 
 A roblox trash talker because :)
 
