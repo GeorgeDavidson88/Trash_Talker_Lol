@@ -1,6 +1,6 @@
 # Trash Talker
 
-A roblox trash talker because :)
+A trash talker because :)
 
 ## Instructions
 
