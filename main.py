@@ -7,6 +7,8 @@ import pynput
 
 class Main:
     def __init__(self):
+        self.chat_key = "/"  # The key to open the chat.
+
         self.F1_Phrase = "Trash Kid"
         self.F2_Phrase = "Easy :)"
         self.F3_Phrase = "DEAD LOL"
@@ -27,10 +29,10 @@ class Main:
                 self.endings.append(line.strip())
 
     def say(self, string):
-        pynput.keyboard.Controller().tap(key="/")
-        time.sleep(0.05)  # You have to wait a bit for the chat to open.
+        pynput.keyboard.Controller().tap(key=self.chat_key)
+        time.sleep(0.05)  # You have to wait for the chat to open.
         pynput.keyboard.Controller().type(string)
-        # You have to wait for the letters to be rendered before clicking Enter.
+        # You have to wait before clicking Enter.
         time.sleep(0.05)
         pynput.keyboard.Controller().tap(pynput.keyboard.Key.enter)
 
