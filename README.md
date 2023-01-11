@@ -21,3 +21,5 @@ Tap F8 to say a random phrase from phrases.txt.
 ### Things To Note
 
 The endings.txt file is to add more variety to the phrases.
+
+You will never see the same phrase twice.
